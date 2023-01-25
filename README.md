@@ -1,4 +1,4 @@
-# AGH_9_LSC
+# Large Scale Computing - Knative
 
 The files were grouped into three project stages:
 
