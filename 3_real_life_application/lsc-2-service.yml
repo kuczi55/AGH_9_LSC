@@ -1,0 +1,29 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: lsc-2-emotions-detection-service
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/target: "1"
+        autoscaling.knative.dev/min-scale: "1"
+        autoscaling.knative.dev/max-scale: "1"
+      labels:
+        app: lsc-2-emotions-detection-service
+    spec:
+      containers:
+        - image: docker.io/jaceken/lsc-2-emotions-detection-service:latest
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "2"
+            limits:
+              memory: "2Gi"
+              cpu: "2"
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              value: "<access_key>"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "<secret_key>"

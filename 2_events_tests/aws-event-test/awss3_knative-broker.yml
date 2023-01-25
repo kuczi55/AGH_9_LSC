@@ -1,0 +1,23 @@
+apiVersion: sources.triggermesh.io/v1alpha1
+kind: AWSS3Source
+metadata:
+  name: lsc-awss3-source
+spec:
+  arn: arn:aws:s3:::lsc-test-knative-2
+
+  eventTypes:
+  - s3:ObjectCreated:*
+  - s3:ObjectRemoved:*
+
+  auth:
+    credentials:
+      accessKeyID: 
+        value: <your access key>
+      secretAccessKey: 
+        value: <your secret key>
+
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: lsc-knative-broker

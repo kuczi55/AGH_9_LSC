@@ -1,0 +1,31 @@
+specVersion: 0.34.0
+name: lsc-2-upload-results
+runtime: python
+registry: ""
+image: docker.io/jaceken/lsc-2-upload-results
+imageDigest: sha256:c0d325726484f16f91f13343c42bbf11b92683ad7908017373887cc7b9c934d4
+created: 2023-01-08T17:37:12.204564446Z
+invocation:
+  format: cloudevent
+build:
+  buildpacks: []
+  builder: pack
+  buildEnvs: []
+run:
+  volumes: []
+  envs: []
+deploy:
+  namespace: default
+  annotations: {}
+  options:
+    scale:
+      min: 1
+      max: 3
+  labels:
+  - key: app
+    value: lsc-2-upload-results
+  - key: project
+    value: lsc
+  healthEndpoints:
+    liveness: /health/liveness
+    readiness: /health/readiness

@@ -1,0 +1,29 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: lsc-trigger-lsc-1-people-detection
+spec:
+  broker: lsc-knative-broker
+  filter:
+    attributes:
+      type: com.amazon.s3.objectcreated
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: lsc-1-people-detection-service
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: lsc-trigger-lsc-2-emotions-detection
+spec:
+  broker: lsc-knative-broker
+  filter:
+    attributes:
+      type: lsc-1.success
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: lsc-2-emotions-detection-service

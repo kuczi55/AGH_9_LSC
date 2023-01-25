@@ -1,0 +1,23 @@
+apiVersion: sources.triggermesh.io/v1alpha1
+kind: AWSSQSSource
+metadata:
+  name: sqs-guide
+spec:
+  arn: arn:aws:sqs:eu-central-1:093712390116:sqs-guide
+  receiveOptions:
+    visibilityTimeout: 30m
+  auth:
+    credentials:
+      accessKeyID:
+        valueFromSecret:
+          name: awscreds
+          key: access_key_id
+      secretAccessKey:
+        valueFromSecret:
+          name: awscreds
+          key: secret_access_key
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default

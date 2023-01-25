@@ -1,0 +1,35 @@
+specVersion: 0.34.0
+name: python-test-events
+runtime: python
+registry: ""
+image: docker.io/jaceken/lsc-python-test-events:latest
+imageDigest: sha256:13b1a2751748a3daed5a426dd8a1e1f72b23c15641cfcc9d3252ca9ac1553ea9
+created: 2023-01-06T19:40:44.99950374Z
+invocation:
+  format: cloudevent
+build:
+  buildpacks: []
+  builder: pack
+  buildEnvs: []
+run:
+  volumes: []
+  envs:
+  - name: EXAMPLE1
+    value: example1-value
+  - name: ACCESS_KEY
+    value: '{{ secret:aws-cred:access-key }}'
+  - name: SECRET
+    value: '{{ secret:aws-cred:secret }}'
+deploy:
+  namespace: default
+  annotations: {}
+  options:
+    scale:
+      min: 1
+      max: 3
+  labels:
+  - key: app
+    value: events-test
+  healthEndpoints:
+    liveness: /health/liveness
+    readiness: /health/readiness

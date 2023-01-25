@@ -1,0 +1,33 @@
+specVersion: 0.34.0
+name: lsc-1-people-detection
+runtime: python
+registry: ""
+image: "docker.io/jaceken/lsc-1-people-detection:latest"
+imageDigest: ""
+created: 2023-01-08T17:24:32.154898032Z
+invocation:
+  format: cloudevent
+build:
+  buildpacks: []
+  builder: pack
+  buildEnvs: []
+run:
+  volumes: []
+  envs:
+  - name: AWS_ACCESS_KEY_ID
+    value: '{{ secret:aws-cred:access-key }}'
+  - name: AWS_SECRET_ACCESS_KEY
+    value: '{{ secret:aws-cred:secret }}'
+deploy:
+  namespace: default
+  annotations: {}
+  options:
+    scale:
+      min: 1
+      max: 3
+  labels:
+  - key: app
+    value: lsc-1-people-detection
+  healthEndpoints:
+    liveness: /health/liveness
+    readiness: /health/readiness

@@ -1,0 +1,26 @@
+specVersion: 0.34.0
+name: hello
+runtime: go
+registry: jaceken/lsc-test
+image: docker.io/jaceken/lsc-test:latest
+imageDigest: sha256:f6e9bfe30a3efdc74ac1008f54bc63e241ab22fddadd1cb8dd73dad5b15196f5
+created: 2022-12-13T20:57:58.376668176Z
+invocation:
+  format: http
+build:
+  buildpacks:
+  - paketo-buildpacks/go-dist
+  - ghcr.io/boson-project/go-function-buildpack:tip
+  builder: pack
+  buildEnvs: []
+run:
+  volumes: []
+  envs: []
+deploy:
+  namespace: default
+  annotations: {}
+  options: {}
+  labels: []
+  healthEndpoints:
+    liveness: /health/liveness
+    readiness: /health/readiness

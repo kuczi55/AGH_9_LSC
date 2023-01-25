@@ -1,0 +1,24 @@
+specVersion: 0.34.0
+name: python-test
+runtime: python
+registry: ""
+image: docker.io/jaceken/lsc-python-test:latest
+imageDigest: ""
+created: 2023-01-06T19:35:27.499347192Z
+invocation:
+  format: http
+build:
+  buildpacks: []
+  builder: pack
+  buildEnvs: []
+run:
+  volumes: []
+  envs: []
+deploy:
+  namespace: lsc-project
+  annotations: {}
+  options: {}
+  labels: []
+  healthEndpoints:
+    liveness: /health/liveness
+    readiness: /health/readiness
